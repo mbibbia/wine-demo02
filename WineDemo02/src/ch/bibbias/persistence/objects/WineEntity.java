@@ -65,8 +65,8 @@ public class WineEntity {
 		return classification;
 	}
 
-	public void setClassification(WineClassificationEntity classification) {
-		this.classification = classification;
+	public void setClassification(WineClassificationEntity wineClassification) {
+		this.classification = wineClassification;
 	}
 
 	public CountryEntity getCountry() {

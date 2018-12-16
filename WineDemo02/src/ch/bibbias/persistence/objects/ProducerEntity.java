@@ -44,8 +44,8 @@ public class ProducerEntity {
 	@JoinColumn(name = "wine_id", referencedColumnName = "wine_id")
 	private List<WineEntity> wines;
 
-	public ProducerEntity(String name) {
-		this.name = name;
+	public ProducerEntity(Integer id) {
+		this.id = id;
 
 	}
 

@@ -5,6 +5,10 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
 import ch.bibbias.config.Configuration;
+import ch.bibbias.persistence.objects.CountryEntity;
+import ch.bibbias.persistence.objects.ProducerEntity;
+import ch.bibbias.persistence.objects.RegionEntity;
+import ch.bibbias.persistence.objects.WineClassificationEntity;
 import ch.bibbias.persistence.objects.WineEntity;
 import ch.bibbias.persistence.objects.WineTypeEntity;
 import javafx.beans.property.IntegerProperty;
@@ -64,27 +68,41 @@ public class Wine {
 	}
 
 	public StringProperty getTypeProperty() {
-		if (this.persistent.getWineType() != null) {
-			return new SimpleStringProperty(this.persistent.getWineType().getName());
-		} else {
+		if (this.persistent.getWineType() == null) {
 			return null;
 		}
+		return new SimpleStringProperty(this.persistent.getWineType().getName());
 	}
 
 	public WineType getType() {
 		return new WineType(this.persistent.getWineType());
 	}
 
+	public void setClassification(WineClassification classification) {
+		this.persistent.setClassification(new WineClassificationEntity(classification.getCode()));
+	}
+
 	public void setType(WineType wineType) {
 		this.persistent.setWineType(new WineTypeEntity(wineType.getCode()));
 	}
 
+	public void setCountry(Country country) {
+		this.persistent.setCountry(new CountryEntity(country.getCode()));
+	}
+
+	public void setRegion(Region region) {
+		this.persistent.setRegion(new RegionEntity(region.getId()));
+	}
+
+	public void setProducer(Producer producer) {
+		this.persistent.setProducer(new ProducerEntity(producer.getId()));
+	}
+
 	public StringProperty getClassificationProperty() {
 		if (this.persistent.getClassification() != null) {
-			return new SimpleStringProperty(this.persistent.getClassification().getName());
-		} else {
 			return null;
 		}
+		return new SimpleStringProperty(this.persistent.getClassification().getName());
 	}
 
 	public WineClassification getClassification() {
@@ -92,11 +110,10 @@ public class Wine {
 	}
 
 	public StringProperty getCountryProperty() {
-		if (this.persistent.getCountry() != null) {
-			return new SimpleStringProperty(this.persistent.getCountry().getName());
-		} else {
+		if (this.persistent.getCountry() == null) {
 			return null;
 		}
+		return new SimpleStringProperty(this.persistent.getCountry().getName());
 
 	}
 
@@ -105,11 +122,11 @@ public class Wine {
 	}
 
 	public StringProperty getRegionProperty() {
-		if (this.persistent.getRegion() != null) {
-			return new SimpleStringProperty(this.persistent.getRegion().getName());
-		} else {
+		if (this.persistent.getRegion() == null) {
 			return null;
 		}
+		return new SimpleStringProperty(this.persistent.getRegion().getName());
+
 	}
 
 	public Region getRegion() {
@@ -148,7 +165,9 @@ public class Wine {
 		EntityManager em = emf.createEntityManager();
 		em.getTransaction().begin();
 
-		em.persist(this.persistent);
+		if (this.persistent.getId() == 0) {
+			em.persist(this.persistent);
+		}
 
 		em.getTransaction().commit();
 		em.close();

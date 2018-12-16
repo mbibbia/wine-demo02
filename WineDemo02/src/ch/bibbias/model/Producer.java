@@ -36,7 +36,7 @@ public class Producer {
 		}
 	}
 
-	public long getId() {
+	public Integer getId() {
 		return this.persistent.getId();
 	}
 
