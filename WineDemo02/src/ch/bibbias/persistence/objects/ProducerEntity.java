@@ -40,7 +40,8 @@ public class ProducerEntity {
 	@JoinColumn(name = "producer_region")
 	private RegionEntity region;
 
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER /* LAZY */, mappedBy = "producer")
+	@OneToMany
+	@JoinColumn(name = "wine_id", referencedColumnName = "wine_id")
 	private List<WineEntity> wines;
 
 	public ProducerEntity(String name) {

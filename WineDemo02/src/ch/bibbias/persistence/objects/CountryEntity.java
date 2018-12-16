@@ -2,6 +2,7 @@ package ch.bibbias.persistence.objects;
 
 import javax.persistence.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -9,18 +10,18 @@ import java.util.List;
 public class CountryEntity {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Integer id;
-
 	@Column(name = "country_code", length = 2)
 	private String code;
 
 	@Column(name = "country_name")
 	private String name;
 
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER /* LAZY */, mappedBy = "country")
-	@JoinColumn(name = "country_regions")
-	private List<RegionEntity> regions;
+	@OneToMany(mappedBy = "country", cascade = CascadeType.ALL)
+	private List<RegionEntity> regions = new ArrayList<RegionEntity>();
+
+	@OneToMany
+	@JoinColumn(name = "wine_id", referencedColumnName = "wine_id")
+	private List<WineEntity> wines = new ArrayList<WineEntity>();
 
 	public CountryEntity(String code) {
 		this.code = code;

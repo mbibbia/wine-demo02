@@ -7,6 +7,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
 
+import ch.bibbias.config.Configuration;
 import ch.bibbias.persistence.objects.CountryEntity;
 import ch.bibbias.persistence.objects.RegionEntity;
 import javafx.collections.FXCollections;
@@ -14,11 +15,9 @@ import javafx.collections.ObservableList;
 
 public class RegionList {
 
-	private final String DATABASE = "PT_Wine_Inventory";
-
 	public ObservableList<Region> get() {
 
-		EntityManagerFactory emf = Persistence.createEntityManagerFactory(this.DATABASE);
+		EntityManagerFactory emf = Persistence.createEntityManagerFactory(Configuration.DATABASE);
 		EntityManager em = emf.createEntityManager();
 		em.getTransaction().begin();
 
@@ -44,7 +43,7 @@ public class RegionList {
 		
 		CountryEntity c = new CountryEntity(country.getCode());
 
-		EntityManagerFactory emf = Persistence.createEntityManagerFactory(this.DATABASE);
+		EntityManagerFactory emf = Persistence.createEntityManagerFactory(Configuration.DATABASE);
 		EntityManager em = emf.createEntityManager();
 		em.getTransaction().begin();
 
@@ -69,7 +68,7 @@ public class RegionList {
 
 	public int getCount() {
 
-		EntityManagerFactory emf = Persistence.createEntityManagerFactory(this.DATABASE);
+		EntityManagerFactory emf = Persistence.createEntityManagerFactory(Configuration.DATABASE);
 		EntityManager em = emf.createEntityManager();
 		em.getTransaction().begin();
 
@@ -84,8 +83,8 @@ public class RegionList {
 		RegionList list = new RegionList();
 		for (Region r : list.get()) {
 			System.out.print(r.getId());
-			System.out.print("\t" + r.getName());
 			System.out.print("\t" + r.getCountry().getCode());
+			System.out.print("\t" + r.getName());
 			System.out.println();
 		}
 	}

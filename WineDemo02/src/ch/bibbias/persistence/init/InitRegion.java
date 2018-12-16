@@ -218,6 +218,7 @@ public class InitRegion {
 
 		for (RegionEntity r : regionList) {
 			em.persist(r);
+
 		}
 
 		em.getTransaction().commit();

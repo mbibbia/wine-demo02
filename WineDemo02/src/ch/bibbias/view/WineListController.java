@@ -13,7 +13,7 @@ public class WineListController {
 	@FXML
 	private TableView<Wine> wineTable;
 	@FXML
-	private TableColumn<Wine, Long> wineIdColumn;
+	private TableColumn<Wine, Integer> wineIdColumn;
 	@FXML
 	private TableColumn<Wine, String> wineNameColumn;
 	@FXML

@@ -4,11 +4,11 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
+import ch.bibbias.config.Configuration;
 import ch.bibbias.persistence.objects.ProducerEntity;
 
 public class Producer {
 
-	private final String DATABASE = "PT_Wine_Inventory";
 	private Integer id;
 	private ProducerEntity persistent;
 
@@ -22,7 +22,7 @@ public class Producer {
 		this.id = id;
 
 		// Load Data
-		EntityManagerFactory emf = Persistence.createEntityManagerFactory(this.DATABASE);
+		EntityManagerFactory emf = Persistence.createEntityManagerFactory(Configuration.DATABASE);
 		EntityManager em = emf.createEntityManager();
 
 		this.persistent = em.find(ProducerEntity.class, this.id);
@@ -86,7 +86,7 @@ public class Producer {
 
 	public void save() {
 
-		EntityManagerFactory emf = Persistence.createEntityManagerFactory(this.DATABASE);
+		EntityManagerFactory emf = Persistence.createEntityManagerFactory(Configuration.DATABASE);
 		EntityManager em = emf.createEntityManager();
 		em.getTransaction().begin();
 
@@ -100,7 +100,7 @@ public class Producer {
 
 	public void delete() {
 
-		EntityManagerFactory emf = Persistence.createEntityManagerFactory(this.DATABASE);
+		EntityManagerFactory emf = Persistence.createEntityManagerFactory(Configuration.DATABASE);
 		EntityManager em = emf.createEntityManager();
 		em.getTransaction().begin();
 

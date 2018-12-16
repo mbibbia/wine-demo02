@@ -7,17 +7,16 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
 
+import ch.bibbias.config.Configuration;
 import ch.bibbias.persistence.objects.WineEntity;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 public class WineList {
 
-	private final String DATABASE = "PT_Wine_Inventory";
-
 	public ObservableList<Wine> get() {
 
-		EntityManagerFactory emf = Persistence.createEntityManagerFactory(this.DATABASE);
+		EntityManagerFactory emf = Persistence.createEntityManagerFactory(Configuration.DATABASE);
 		EntityManager em = emf.createEntityManager();
 		em.getTransaction().begin();
 
@@ -41,7 +40,7 @@ public class WineList {
 
 	public int getCount() {
 
-		EntityManagerFactory emf = Persistence.createEntityManagerFactory(this.DATABASE);
+		EntityManagerFactory emf = Persistence.createEntityManagerFactory(Configuration.DATABASE);
 		EntityManager em = emf.createEntityManager();
 		em.getTransaction().begin();
 

@@ -9,17 +9,14 @@ import javax.persistence.*;
 public class WineClassificationEntity {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Integer id;
-
 	@Column(name = "classification_code")
 	private String code;
 
 	@Column(name = "classification_name")
 	private String name;
 
-	@ManyToMany(cascade = CascadeType.ALL)
-	@JoinTable(name = "wine")
+	@OneToMany
+	@JoinColumn(name = "wine_id", referencedColumnName = "wine_id")
 	private List<WineEntity> wines;
 
 	public WineClassificationEntity(String code) {
@@ -28,14 +25,6 @@ public class WineClassificationEntity {
 
 	public WineClassificationEntity() {
 
-	}
-
-	public Integer getId() {
-		return id;
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
 	}
 
 	public String getCode() {

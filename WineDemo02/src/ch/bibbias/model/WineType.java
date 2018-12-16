@@ -4,11 +4,11 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
+import ch.bibbias.config.Configuration;
 import ch.bibbias.persistence.objects.WineTypeEntity;
 
 public class WineType {
 
-	private final String DATABASE = "PT_Wine_Inventory";
 	private WineTypeEntity persistent;
 	private String code;
 	private boolean isDirty;
@@ -23,7 +23,7 @@ public class WineType {
 		this.code = code;
 
 		// Load Data
-		EntityManagerFactory emf = Persistence.createEntityManagerFactory(this.DATABASE);
+		EntityManagerFactory emf = Persistence.createEntityManagerFactory(Configuration.DATABASE);
 		EntityManager em = emf.createEntityManager();
 
 		this.persistent = em.find(WineTypeEntity.class, this.code);
@@ -62,7 +62,7 @@ public class WineType {
 
 	public void save() {
 
-		EntityManagerFactory emf = Persistence.createEntityManagerFactory(this.DATABASE);
+		EntityManagerFactory emf = Persistence.createEntityManagerFactory(Configuration.DATABASE);
 		EntityManager em = emf.createEntityManager();
 		em.getTransaction().begin();
 
@@ -78,7 +78,7 @@ public class WineType {
 
 	public void delete() {
 
-		EntityManagerFactory emf = Persistence.createEntityManagerFactory(this.DATABASE);
+		EntityManagerFactory emf = Persistence.createEntityManagerFactory(Configuration.DATABASE);
 		EntityManager em = emf.createEntityManager();
 		em.getTransaction().begin();
 

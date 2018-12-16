@@ -13,7 +13,7 @@ import javafx.collections.ObservableList;
 
 public class CountryList {
 
-	private final String DATABASE = "PT_Wine_Inventory";
+	private final String DATABASE = "pt_wine_inventory_2";
 
 	public ObservableList<Country> get() {
 

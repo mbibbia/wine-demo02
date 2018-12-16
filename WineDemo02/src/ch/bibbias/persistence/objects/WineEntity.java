@@ -10,6 +10,7 @@ public class WineEntity {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "wine_id")
 	private Integer id;
 
 	@Column(name = "wine_name")
@@ -27,8 +28,8 @@ public class WineEntity {
 	@JoinColumn(name = "wine_producer")
 	private ProducerEntity producer;
 
-	public WineEntity(String name) {
-		this.name = name;
+	public WineEntity(Integer id) {
+		this.id = id;
 
 	}
 

@@ -4,22 +4,22 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
+import ch.bibbias.config.Configuration;
 import ch.bibbias.persistence.objects.WineEntity;
 import ch.bibbias.persistence.objects.WineTypeEntity;
-import javafx.beans.property.LongProperty;
-import javafx.beans.property.SimpleLongProperty;
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
 public class Wine {
 
-	private final String DATABASE = "PT_Wine_Inventory";
 	private Integer id;
 	private WineEntity persistent;
 
 	public Wine() {
 		this.persistent = new WineEntity();
-		// this.id = this.persistent.getId();
+		this.id = this.persistent.getId();
 
 	}
 
@@ -27,7 +27,7 @@ public class Wine {
 		this.id = id;
 
 		// Load Data
-		EntityManagerFactory emf = Persistence.createEntityManagerFactory(this.DATABASE);
+		EntityManagerFactory emf = Persistence.createEntityManagerFactory(Configuration.DATABASE);
 		EntityManager em = emf.createEntityManager();
 
 		this.persistent = em.find(WineEntity.class, this.id);
@@ -41,8 +41,8 @@ public class Wine {
 		}
 	}
 
-	public LongProperty getIdProperty() {
-		return new SimpleLongProperty(this.persistent.getId());
+	public IntegerProperty getIdProperty() {
+		return new SimpleIntegerProperty(this.persistent.getId());
 	}
 
 	public long getId() {
@@ -64,7 +64,11 @@ public class Wine {
 	}
 
 	public StringProperty getTypeProperty() {
-		return new SimpleStringProperty(this.persistent.getWineType().getName());
+		if (this.persistent.getWineType() != null) {
+			return new SimpleStringProperty(this.persistent.getWineType().getName());
+		} else {
+			return null;
+		}
 	}
 
 	public WineType getType() {
@@ -76,7 +80,11 @@ public class Wine {
 	}
 
 	public StringProperty getClassificationProperty() {
-		return new SimpleStringProperty(this.persistent.getClassification().getName());
+		if (this.persistent.getClassification() != null) {
+			return new SimpleStringProperty(this.persistent.getClassification().getName());
+		} else {
+			return null;
+		}
 	}
 
 	public WineClassification getClassification() {
@@ -84,7 +92,12 @@ public class Wine {
 	}
 
 	public StringProperty getCountryProperty() {
-		return new SimpleStringProperty(this.persistent.getCountry().getName());
+		if (this.persistent.getCountry() != null) {
+			return new SimpleStringProperty(this.persistent.getCountry().getName());
+		} else {
+			return null;
+		}
+
 	}
 
 	public Country getCountry() {
@@ -92,28 +105,46 @@ public class Wine {
 	}
 
 	public StringProperty getRegionProperty() {
-		return new SimpleStringProperty(this.persistent.getRegion().getName());
+		if (this.persistent.getRegion() != null) {
+			return new SimpleStringProperty(this.persistent.getRegion().getName());
+		} else {
+			return null;
+		}
 	}
 
 	public Region getRegion() {
-		return new Region(this.persistent.getRegion());
+		if (this.persistent.getRegion() != null) {
+			return new Region(this.persistent.getRegion());
+		} else {
+			return new Region();
+		}
+
 	}
 
 	public StringProperty getProducerProperty() {
-		return new SimpleStringProperty(this.persistent.getProducer().getName());
+		if (this.persistent.getProducer() != null) {
+			return new SimpleStringProperty(this.persistent.getProducer().getName());
+		} else {
+			return null;
+		}
 	}
 
 	public Producer getProducer() {
-		return new Producer(this.persistent.getProducer());
+		if (this.persistent.getProducer() != null) {
+			return new Producer(this.persistent.getProducer());
+		} else {
+			return new Producer();
+		}
+
 	}
 
 	public void reset() {
-		//this.persistent = new WineEntity(this.id);
+		this.persistent = new WineEntity(this.id);
 	}
 
 	public void save() {
 
-		EntityManagerFactory emf = Persistence.createEntityManagerFactory(this.DATABASE);
+		EntityManagerFactory emf = Persistence.createEntityManagerFactory(Configuration.DATABASE);
 		EntityManager em = emf.createEntityManager();
 		em.getTransaction().begin();
 
@@ -129,7 +160,7 @@ public class Wine {
 
 	public void delete() {
 
-		EntityManagerFactory emf = Persistence.createEntityManagerFactory(this.DATABASE);
+		EntityManagerFactory emf = Persistence.createEntityManagerFactory(Configuration.DATABASE);
 		EntityManager em = emf.createEntityManager();
 		em.getTransaction().begin();
 

@@ -33,7 +33,7 @@ public class InitProducer {
 		producer.seteMail("info@parusso.com");
 		producer.setUrl("http://parusso.com/");
 		producer.setCountry(new CountryEntity("IT"));
-		producer.setRegion(new RegionEntity(18)); // Piemont
+		//producer.setRegion(new RegionEntity(18)); // Piemont
 		producerList.add(producer);
 
 		for (ProducerEntity p : producerList) {

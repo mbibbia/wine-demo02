@@ -15,7 +15,7 @@ public class RegionEntity {
 
 	@ManyToOne
 	@JoinColumn(name = "country")
-	private CountryEntity country;
+	private CountryEntity country = new CountryEntity();
 
 	public RegionEntity(Integer id) {
 		this.id = id;
